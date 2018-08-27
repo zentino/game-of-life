@@ -6,9 +6,10 @@ public class Cell {
 	private int yCoordinate;
 	private boolean isAlive;
 
-	public Cell(int xCoordinate, int yCoordinate) {
+	public Cell(boolean isAlive, int xCoordinate, int yCoordinate) {
 		this.xCoordinate = xCoordinate;
-		this.yCoordinate = yCoordinate;
+		this.setyCoordinate(yCoordinate);
+		this.isAlive = isAlive;
 	}
 
 	public int getxCoordinate() {
@@ -25,5 +26,13 @@ public class Cell {
 
 	public void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
+	}
+
+	public int getyCoordinate() {
+		return yCoordinate;
+	}
+
+	public void setyCoordinate(int yCoordinate) {
+		this.yCoordinate = yCoordinate;
 	}
 }

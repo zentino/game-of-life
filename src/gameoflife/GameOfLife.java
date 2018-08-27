@@ -1,6 +1,5 @@
 package gameoflife;
 
-
 import javax.swing.JFrame;
 
 public class GameOfLife {
