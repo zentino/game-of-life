@@ -10,16 +10,17 @@ public class GameOfLife {
 	private SimulationPanel simPanel;
 
 	public GameOfLife() {
-		initGui();
+		initGuiAndShow();
 	}
 
-	private void initGui() {
+	private void initGuiAndShow() {
 		jframe = new JFrame("Game Of Life Clone");
 		simPanel = new SimulationPanel();
 		jframe.setSize(WIDTH, HEIGHT);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setResizable(false);
 		jframe.add(simPanel);
+
 		jframe.setVisible(true);
 
 	}

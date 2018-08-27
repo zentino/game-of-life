@@ -8,7 +8,7 @@ public class Cell {
 
 	public Cell(boolean isAlive, int xCoordinate, int yCoordinate) {
 		this.xCoordinate = xCoordinate;
-		this.setyCoordinate(yCoordinate);
+		this.yCoordinate = yCoordinate;
 		this.isAlive = isAlive;
 	}
 

@@ -27,7 +27,10 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setBackground(Color.GRAY);
 		setLayout(null);
+
 		timer = new Timer(DELAY, this);
+		// calls the actionPerformed method after given delay
+		timer.start();
 
 		initCellMatrix();
 	}
@@ -46,8 +49,8 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		drawGrid(g);
 		drawCells(g);
+		drawGrid(g);
 	}
 
 	private void drawGrid(Graphics g) {
@@ -80,7 +83,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 
+		this.repaint();
 	}
 }
