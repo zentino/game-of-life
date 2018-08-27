@@ -83,7 +83,118 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
+		checkNeighbours();
 		this.repaint();
+	}
+
+	/*
+	 * Count adjacent neighbours of every cell and apply game rules
+	 */
+	private void checkNeighbours() {
+		int countNeighbours = 0;
+
+		for(int xPos = 0; xPos < COLUMNS; xPos++) {
+			for(int yPos = 0; yPos < ROWS; yPos ++) {
+
+				// + = position that gets checked
+				// o = current cell
+
+				/*
+				 *  + - -
+				 *  - o -
+				 * 	- - -
+				 */
+				if(cellMatrix[xPos - 1][yPos - 1].isAlive()) {
+					countNeighbours++;
+				}
+				/*
+				 *  - - -
+				 *  + o -
+				 * 	- - -
+				 */
+				if(cellMatrix[xPos - 1][yPos].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - - -
+				 *  - o -
+				 * 	+ - -
+				 */
+				if(cellMatrix[xPos - 1][yPos + 1].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - - -
+				 *  - o -
+				 * 	- + -
+				 */
+				if(cellMatrix[xPos][yPos + 1].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - - -
+				 *  - o -
+				 * 	- - +
+				 */
+				if(cellMatrix[xPos + 1][yPos + 1].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - - -
+				 *  - o +
+				 * 	- - -
+				 */
+				if(cellMatrix[xPos + 1][yPos].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - - +
+				 *  - o -
+				 * 	- - -
+				 */
+				if(cellMatrix[xPos + 1][yPos - 1].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *  - + -
+				 *  - o -
+				 * 	- - -
+				 */
+				if(cellMatrix[xPos][yPos - 1].isAlive()) {
+					countNeighbours++;
+				}
+
+				// apply game of life rules
+				if(countNeighbours > 3) {
+					// a living cell dies by overpopulation
+					cellMatrix[xPos][yPos].setAlive(false);
+				}
+
+				if(countNeighbours < 2) {
+					// a living cell dies by underpopulation
+					cellMatrix[xPos][yPos].setAlive(false);
+				}
+
+				if(cellMatrix[xPos][yPos].isAlive()) {
+					// a living cell stays alive in the next generation
+					if(countNeighbours == 3 || countNeighbours == 2) {
+						cellMatrix[xPos][yPos].setAlive(true);
+					}
+				} else {
+					// a dead cell gets revived
+					if(countNeighbours == 3) {
+						cellMatrix[xPos][yPos].setAlive(true);
+					}
+				}
+
+
+			}
+		}
 	}
 }
