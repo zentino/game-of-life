@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -24,15 +26,14 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 	public SimulationPanel() {
 		super();
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setBackground(Color.GRAY);
-		setLayout(null);
-
+		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		this.setBackground(Color.GRAY);
+		this.setLayout(null);
+		this.initCellMatrix();
+		this.addMouseListener(getMouseAdapter());
 		timer = new Timer(DELAY, this);
 		// calls the actionPerformed method after given delay
 		timer.start();
-
-		initCellMatrix();
 	}
 
 	private void initCellMatrix() {
@@ -204,5 +205,22 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 			}
 		}
+	}
+
+	private MouseAdapter getMouseAdapter() {
+		return new MouseAdapter() {
+			public void mouseClicked(MouseEvent me) {
+				// dividing by the cell dimensions we get the cellMatrix position of the cell object
+				int xPos = me.getX() / CELL_WIDTH;
+				int yPos = me.getY() / CELL_HEIGHT;
+				if(xPos < COLUMNS && yPos < ROWS ) {
+					if(me.getButton() == MouseEvent.BUTTON1) {
+						cellMatrix[xPos][yPos].setAlive(true);
+					} else if (me.getButton() == MouseEvent.BUTTON2) {
+						cellMatrix[xPos][yPos].setAlive(false);
+					}
+				}
+			}
+		};
 	}
 }
