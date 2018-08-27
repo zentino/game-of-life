@@ -85,6 +85,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		checkNeighbours();
+		updateCellState();
 		this.repaint();
 	}
 
@@ -182,26 +183,26 @@ public class SimulationPanel extends JPanel implements ActionListener {
 				// apply game of life rules
 				if(countNeighbours > 3) {
 					// a living cell dies by overpopulation
-					cellMatrix[xPos][yPos].setAlive(false);
+					cellMatrix[xPos][yPos].setAliveNextGen(false);
 				}
 
 				if(countNeighbours < 2) {
 					// a living cell dies by underpopulation
-					cellMatrix[xPos][yPos].setAlive(false);
+					cellMatrix[xPos][yPos].setAliveNextGen(false);
 				}
 
 				if(cellMatrix[xPos][yPos].isAlive()) {
 					// a living cell stays alive in the next generation
 					if(countNeighbours == 3 || countNeighbours == 2) {
-						cellMatrix[xPos][yPos].setAlive(true);
+						cellMatrix[xPos][yPos].setAliveNextGen(true);
 					}
 				} else {
 					// a dead cell gets revived
 					if(countNeighbours == 3) {
-						cellMatrix[xPos][yPos].setAlive(true);
+						cellMatrix[xPos][yPos].setAliveNextGen(true);
 					}
 				}
-
+				countNeighbours = 0;
 
 			}
 		}
@@ -222,5 +223,14 @@ public class SimulationPanel extends JPanel implements ActionListener {
 				}
 			}
 		};
+	}
+
+	// updates the cell state (alive/dead) after one generation/iteration
+	private void updateCellState() {
+		for(int xPos = 0; xPos < COLUMNS; xPos++) {
+			for(int yPos = 0; yPos < ROWS; yPos ++) {
+				cellMatrix[xPos][yPos].setAlive(cellMatrix[xPos][yPos].isAliveNextGen());
+			}
+		}
 	}
 }
