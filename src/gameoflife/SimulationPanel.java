@@ -100,73 +100,81 @@ public class SimulationPanel extends JPanel implements ActionListener {
 				// o = current cell
 
 				/*
-				 *  + - -
-				 *  - o -
-				 * 	- - -
+				 *	+ - -
+				 *	- o -
+				 *	- - -
+				 *
 				 */
-				if(cellMatrix[xPos - 1][yPos - 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos - 1, COLUMNS) ][Math.floorMod(yPos - 1, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 				/*
-				 *  - - -
-				 *  + o -
-				 * 	- - -
+				 *	- - -
+				 *	+ o -
+				 *	- - -
+				 *
 				 */
-				if(cellMatrix[xPos - 1][yPos].isAlive()) {
-					countNeighbours++;
-				}
-
-				/*
-				 *  - - -
-				 *  - o -
-				 * 	+ - -
-				 */
-				if(cellMatrix[xPos - 1][yPos + 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos - 1, COLUMNS)][Math.floorMod(yPos, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
 				/*
-				 *  - - -
-				 *  - o -
-				 * 	- + -
+				 *	- - -
+				 *	- o -
+				 *	+ - -
+				 *
 				 */
-				if(cellMatrix[xPos][yPos + 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos - 1, COLUMNS)][Math.floorMod(yPos + 1, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
 				/*
-				 *  - - -
-				 *  - o -
-				 * 	- - +
+				 *	- - -
+				 *	- o -
+				 *	- + -
+				 *
 				 */
-				if(cellMatrix[xPos + 1][yPos + 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos, COLUMNS)][Math.floorMod(yPos + 1, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
 				/*
-				 *  - - -
-				 *  - o +
-				 * 	- - -
+				 *	- - -
+				 *	- o -
+				 *	- - +
+				 *
 				 */
-				if(cellMatrix[xPos + 1][yPos].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos + 1, COLUMNS)][Math.floorMod(yPos + 1, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
 				/*
-				 *  - - +
-				 *  - o -
-				 * 	- - -
+				 *	- - -
+				 *	- o +
+				 *	- - -
+				 *
 				 */
-				if(cellMatrix[xPos + 1][yPos - 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos + 1, COLUMNS)][Math.floorMod(yPos, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
 				/*
-				 *  - + -
-				 *  - o -
-				 * 	- - -
+				 *	- - +
+				 *	- o -
+				 *	- - -
+				 *
 				 */
-				if(cellMatrix[xPos][yPos - 1].isAlive()) {
+				if(cellMatrix[Math.floorMod(xPos + 1, COLUMNS)][Math.floorMod(yPos - 1, ROWS)].isAlive()) {
+					countNeighbours++;
+				}
+
+				/*
+				 *	- + -
+				 *	- o -
+				 *	- - -
+				 *
+				 */
+				if(cellMatrix[Math.floorMod(xPos, COLUMNS)][Math.floorMod(yPos - 1, ROWS)].isAlive()) {
 					countNeighbours++;
 				}
 
