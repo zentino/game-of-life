@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 public class GameOfLife {
 
 	private JFrame jframe;
-	private static final int WIDTH = 700;
-	private static final int HEIGHT = 700;
+	private static final int WIDTH = 900;
+	private static final int HEIGHT = 900;
 	private SimulationPanel simPanel;
 
 	public GameOfLife() {
