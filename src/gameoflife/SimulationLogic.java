@@ -1,5 +1,7 @@
 package gameoflife;
 
+import java.util.Random;
+
 public class SimulationLogic {
 
 	private int columns = 200;
@@ -16,6 +18,30 @@ public class SimulationLogic {
 			for (int y = 0; y < rows; y++) {
 				cellMatrix[x][y] = new Cell(false, x, y);
 			}
+		}
+	}
+
+	public void clearCellMatrix() {
+		for(int x = 0; x < columns; x++) {
+			for(int y = 0; y < rows; y++) {
+				cellMatrix[x][y].setAlive(false);
+				cellMatrix[x][y].setAliveNextGen(false);
+			}
+		}
+	}
+
+	public void initCellsRandomly() {
+		Random random = new Random();
+		for(int x = 0; x < columns; x++) {
+			for(int y = 0; y < rows; y++) {
+				cellMatrix[x][y].setAlive(random.nextBoolean());
+			}
+		}
+	}
+
+	public void reviveCell(boolean isAlive, int x, int y) {
+		if(x < columns && y < rows) {
+			cellMatrix[x][y].setAlive(true);
 		}
 	}
 
