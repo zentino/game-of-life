@@ -83,6 +83,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	private void drawCells(Graphics g) {
 		int columns = simLogic.getColumns();
 		int rows = simLogic.getRows();
+		// Width and height of a rectangle that represents the cell
 		int rectWidth = (DRAW_WIDTH/columns);
 		int rectHeight = (DRAW_HEIGHT/rows);
 
@@ -113,6 +114,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	// This is the "Game loop" that gets called after a given delay (myTimerDelay)
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(gameStart) {
@@ -120,7 +122,6 @@ public class SimulationPanel extends JPanel implements ActionListener {
 			simLogic.updateCellState();
 			reDraw();
 		}
-
 	}
 
 	public void reDraw() {
