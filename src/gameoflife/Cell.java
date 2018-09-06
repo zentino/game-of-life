@@ -12,7 +12,7 @@ public class Cell {
 		this.xCoordinate = xCoordinate;
 		this.yCoordinate = yCoordinate;
 		this.isAlive = isAlive;
-		this.setAliveNextGen(false);
+		isAliveNextGen = false;
 		this.neighbours = 0;
 	}
 
@@ -32,23 +32,25 @@ public class Cell {
 
 	public void setAliveNextGen(boolean isAliveNextGen) { this.isAliveNextGen = isAliveNextGen; }
 
+	public void setNeighBours(int neighbours) { this.neighbours = neighbours; }
+
 	// Game Of Life Rules
 	public void applyRules() {
 		if(neighbours >  3) {
-			setAliveNextGen(false);
+			isAliveNextGen = false;
 		}
 
 		if(neighbours < 2) {
-			setAliveNextGen(false);
+			isAliveNextGen = false;
 		}
 
 		if(isAlive) {
 			if(neighbours == 3 || neighbours == 2) {
-				setAliveNextGen(true);
+				isAliveNextGen = true;
 			}
 		} else {
 			if(neighbours == 3) {
-				setAliveNextGen(true);
+				isAliveNextGen = true;
 			}
 		}
 	}

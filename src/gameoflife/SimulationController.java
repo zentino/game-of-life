@@ -16,6 +16,7 @@ public class SimulationController {
 	public SimulationController(SimulationLogic simLogic, SimulationPanel simPanel) {
 		this.simLogic = simLogic;
 		this.simPanel = simPanel;
+		this.simPanel.addMouseListener(getMouseAdapter());
 		initController();
 	}
 
@@ -54,8 +55,8 @@ public class SimulationController {
 	private MouseAdapter getMouseAdapter() {
 		return new MouseAdapter() {
 			public void mousePressed(MouseEvent me) {
-				int x = me.getX()/(simPanel.width/simLogic.getColumns());
-				int y = me.getY()/(simPanel.height/simLogic.getRows());
+				int x = me.getX()/(simPanel.getWidth()/simLogic.getColumns());
+				int y = me.getY()/(simPanel.getHeight()/simLogic.getRows());
 				simLogic.reviveCell(true, x, y);
 				simPanel.reDraw();
 			}

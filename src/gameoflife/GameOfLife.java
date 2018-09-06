@@ -1,13 +1,15 @@
 package gameoflife;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class GameOfLife {
 
 	private JFrame jframe;
-	private static final int WIDTH = 900;
-	private static final int HEIGHT = 900;
 	private SimulationPanel simPanel;
+	private SimulationLogic simLogic;
+	private SimulationController simController;
 
 	public GameOfLife() {
 		initGuiAndShow();
@@ -15,13 +17,14 @@ public class GameOfLife {
 
 	private void initGuiAndShow() {
 		jframe = new JFrame("Game Of Life Clone");
-		simPanel = new SimulationPanel();
-		jframe.setSize(WIDTH, HEIGHT);
+		simLogic = new SimulationLogic();
+		simPanel = new SimulationPanel(simLogic);
+		simController = new SimulationController(simLogic, simPanel);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setResizable(false);
 		jframe.add(simPanel);
-
 		jframe.setVisible(true);
+		jframe.pack();
 
 	}
 

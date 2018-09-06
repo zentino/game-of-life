@@ -2,12 +2,10 @@ package gameoflife;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -16,8 +14,8 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class SimulationPanel extends JPanel implements ActionListener {
 
-	private int width = 800;
-	private int height = 800;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 900;
 
 	private int myTimerDelay;
 	private Timer myTimer;
@@ -28,26 +26,34 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	private JButton clearButton;
 	private JButton randomButton;
 	private JSlider speedSlider;
+	private SimulationLogic simLogic;
 
-
-	public SimulationPanel() {
+	public SimulationPanel(SimulationLogic simLogic) {
 		super();
-		this.setPreferredSize(new Dimension(width, height));
+		this.simLogic = simLogic;
+		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setBackground(Color.GRAY);
 		this.setLayout(null);
+		this.setVisible(true);
 
-		buttons = new JPanel();
+		buttons = new JPanel(new FlowLayout());
 		startButton = new JButton("Start");
 		clearButton = new JButton("Clear");
 		randomButton = new JButton("Random");
-		speedSlider = new JSlider();
+		speedSlider = new JSlider(0, 100, 0);
+		speedSlider.setBackground(Color.GRAY);
 
 		buttons.add(startButton);
 		buttons.add(clearButton);
 		buttons.add(randomButton);
 		buttons.add(speedSlider);
+		buttons.setBackground(Color.GRAY);
+		buttons.setBounds(0, HEIGHT - 100, WIDTH, HEIGHT);
 
+		this.add(buttons);
 
+		gameStart = false;
+		myTimerDelay = 700;
 		myTimer= new Timer(myTimerDelay, this);
 		// calls the actionPerformed method after given delay
 		myTimer.start();
@@ -58,15 +64,52 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		//drawCells(g);
-		//drawGrid(g);
+		drawCells(g);
+		g.setColor(Color.GRAY);
+		drawGrid(g);
 	}
 
+	private void drawCells(Graphics g) {
+		int columns = simLogic.getColumns();
+		int rows = simLogic.getRows();
+		int rectWidth = (WIDTH/columns);
+		int rectHeight = (HEIGHT/rows);
+
+		for(int x = 0; x < columns; x++) {
+			for(int yPos = 0; yPos < rows; yPos++) {
+				if(simLogic.getCellMatrix()[x][yPos].isAlive()) {
+					g.setColor(Color.YELLOW);
+					g.fillRect(x * rectWidth, yPos * rectHeight, rectWidth, rectHeight);
+				} else if(!simLogic.getCellMatrix()[x][yPos].isAlive()) {
+					g.setColor(Color.DARK_GRAY);
+					g.fillRect(x * rectWidth , yPos * rectHeight, rectWidth, rectHeight);
+				}
+			}
+		}
+	}
+
+	private void drawGrid(Graphics g) {
+		int columns = simLogic.getColumns();
+		int rows = simLogic.getRows();
+		int rectWidth = (WIDTH/columns);
+		int rectHeight = (HEIGHT/rows);
+
+		for(int x = 0; x < columns; x++) {
+			g.drawLine(x * rectWidth, 0, x * rectHeight, HEIGHT);
+		}
+		for(int y = 0; y < rows; y++) {
+			g.drawLine(0, y * rectHeight, WIDTH, y * rectWidth);
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if(gameStart) {
+			simLogic.countNeighboursAndApplyRules();
+			simLogic.updateCellState();
+			reDraw();
+		}
 
-		reDraw();
 	}
 
 	public void reDraw() {
@@ -77,7 +120,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 	public JButton getClearButton() { return this.clearButton; }
 
-	public JButton getRandomButton() { return this.startButton; }
+	public JButton getRandomButton() { return this.randomButton; }
 
 	public JSlider getSpeedSlider() { return this.speedSlider; }
 
@@ -91,7 +134,4 @@ public class SimulationPanel extends JPanel implements ActionListener {
 
 	public Timer getMyTimer() { return this.myTimer; }
 
-	public int getWidth() { return this.width; }
-
-	public int getHeight() { return this.height; }
 }

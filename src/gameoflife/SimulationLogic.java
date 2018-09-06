@@ -46,7 +46,7 @@ public class SimulationLogic {
 	}
 
 	// updates the cell state (alive/dead) after one generation/iteration
-	private void updateCellState() {
+	public void updateCellState() {
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {
 				cellMatrix[x][y].setAlive(cellMatrix[x][y].isAliveNextGen());
@@ -57,46 +57,54 @@ public class SimulationLogic {
 	/*
 	 * Count adjacent cells of every cell and apply game rules
 	 */
-	private void countNeighboursAndApplyRules() {
-		int countNeighbours = 0;
+	public void countNeighboursAndApplyRules() {
+		int countNeighbours = 0;;
 
-		for (int xPos = 0; xPos < columns; xPos++) {
-			for (int yPos = 0; yPos < rows; yPos++) {
+		for (int x = 0; x < columns; x++) {
+			for (int y = 0; y < rows; y++) {
 
-				if (cellMatrix[Math.floorMod(xPos - 1, columns)][Math.floorMod(yPos - 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x - 1, columns)][Math.floorMod(y - 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos - 1, columns)][Math.floorMod(yPos, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x - 1, columns)][Math.floorMod(y, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos - 1, columns)][Math.floorMod(yPos + 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x - 1, columns)][Math.floorMod(y + 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos, columns)][Math.floorMod(yPos + 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x, columns)][Math.floorMod(y + 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos + 1, columns)][Math.floorMod(yPos + 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x + 1, columns)][Math.floorMod(y + 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos + 1, columns)][Math.floorMod(yPos, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x + 1, columns)][Math.floorMod(y, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos + 1, columns)][Math.floorMod(yPos - 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x + 1, columns)][Math.floorMod(y - 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
 
-				if (cellMatrix[Math.floorMod(xPos, columns)][Math.floorMod(yPos - 1, rows)].isAlive()) {
+				if (cellMatrix[Math.floorMod(x, columns)][Math.floorMod(y - 1, rows)].isAlive()) {
 					countNeighbours++;
 				}
+
+				cellMatrix[x][y].setNeighBours(countNeighbours);
+				cellMatrix[x][y].applyRules();
 				countNeighbours = 0;
 			}
 		}
 	}
 
+	public int getColumns() { return this.columns; }
+
+	public int getRows() { return this.rows; }
+
+	public Cell[][] getCellMatrix() { return this.cellMatrix; }
 }
