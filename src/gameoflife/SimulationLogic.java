@@ -58,7 +58,7 @@ public class SimulationLogic {
 	 * Count adjacent cells of every cell and apply game rules
 	 */
 	public void countNeighboursAndApplyRules() {
-		int countNeighbours = 0;;
+		int countNeighbours = 0;
 
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {

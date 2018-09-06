@@ -10,12 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class SimulationPanel extends JPanel implements ActionListener {
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 900;
+	public static final int DRAW_WIDTH = 800;
+	public static final int DRAW_HEIGHT = 800;
+	public static final int PANEL_WIDTH = 800;
+	public static final int PANEL_HEIGHT = 900;
 
 	private int myTimerDelay;
 	private Timer myTimer;
@@ -31,7 +35,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	public SimulationPanel(SimulationLogic simLogic) {
 		super();
 		this.simLogic = simLogic;
-		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		this.setBackground(Color.GRAY);
 		this.setLayout(null);
 		this.setVisible(true);
@@ -48,7 +52,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		buttons.add(randomButton);
 		buttons.add(speedSlider);
 		buttons.setBackground(Color.GRAY);
-		buttons.setBounds(0, HEIGHT - 100, WIDTH, HEIGHT);
+		buttons.setBounds(0, PANEL_HEIGHT - 70, PANEL_WIDTH, PANEL_HEIGHT);
 
 		this.add(buttons);
 
@@ -72,8 +76,8 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	private void drawCells(Graphics g) {
 		int columns = simLogic.getColumns();
 		int rows = simLogic.getRows();
-		int rectWidth = (WIDTH/columns);
-		int rectHeight = (HEIGHT/rows);
+		int rectWidth = (DRAW_WIDTH/columns);
+		int rectHeight = (DRAW_HEIGHT/rows);
 
 		for(int x = 0; x < columns; x++) {
 			for(int yPos = 0; yPos < rows; yPos++) {
@@ -91,14 +95,14 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	private void drawGrid(Graphics g) {
 		int columns = simLogic.getColumns();
 		int rows = simLogic.getRows();
-		int rectWidth = (WIDTH/columns);
-		int rectHeight = (HEIGHT/rows);
+		int rectWidth = (DRAW_WIDTH/columns);
+		int rectHeight = (DRAW_HEIGHT/rows);
 
 		for(int x = 0; x < columns; x++) {
-			g.drawLine(x * rectWidth, 0, x * rectHeight, HEIGHT);
+			g.drawLine(x * rectWidth, 0, x * rectHeight, DRAW_HEIGHT);
 		}
 		for(int y = 0; y < rows; y++) {
-			g.drawLine(0, y * rectHeight, WIDTH, y * rectWidth);
+			g.drawLine(0, y * rectHeight, DRAW_WIDTH, y * rectWidth);
 		}
 	}
 

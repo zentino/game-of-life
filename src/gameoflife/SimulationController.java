@@ -55,8 +55,8 @@ public class SimulationController {
 	private MouseAdapter getMouseAdapter() {
 		return new MouseAdapter() {
 			public void mousePressed(MouseEvent me) {
-				int x = me.getX()/(simPanel.getWidth()/simLogic.getColumns());
-				int y = me.getY()/(simPanel.getHeight()/simLogic.getRows());
+				int x = me.getX()/(SimulationPanel.DRAW_WIDTH/simLogic.getColumns());
+				int y = me.getY()/(SimulationPanel.DRAW_HEIGHT/simLogic.getRows());
 				simLogic.reviveCell(true, x, y);
 				simPanel.reDraw();
 			}
