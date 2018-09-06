@@ -57,8 +57,16 @@ public class SimulationController {
 			public void mousePressed(MouseEvent me) {
 				int x = me.getX()/(SimulationPanel.DRAW_WIDTH/simLogic.getColumns());
 				int y = me.getY()/(SimulationPanel.DRAW_HEIGHT/simLogic.getRows());
-				simLogic.reviveCell(true, x, y);
-				simPanel.reDraw();
+				// If the left mouse button was pressed then revive the cell
+				if(me.getButton() == me.BUTTON1) {
+					simLogic.reviveCell(x, y);
+					simPanel.reDraw();
+
+				// If the right mouse button was pressed then kill the cell
+				} else if(me.getButton() == me.BUTTON3) {
+					simLogic.killCell(x, y);
+					simPanel.reDraw();
+				}
 			}
 		};
 	}

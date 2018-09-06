@@ -39,9 +39,15 @@ public class SimulationLogic {
 		}
 	}
 
-	public void reviveCell(boolean isAlive, int x, int y) {
+	public void reviveCell(int x, int y) {
 		if(x < columns && y < rows) {
 			cellMatrix[x][y].setAlive(true);
+		}
+	}
+
+	public void killCell(int x, int y) {
+		if(x < columns && y < rows) {
+			cellMatrix[x][y].setAlive(false);
 		}
 	}
 

@@ -6,7 +6,10 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.Timer;
@@ -19,7 +22,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	public static final int DRAW_WIDTH = 800;
 	public static final int DRAW_HEIGHT = 800;
 	public static final int PANEL_WIDTH = 800;
-	public static final int PANEL_HEIGHT = 900;
+	public static final int PANEL_HEIGHT = 870;
 
 	private int myTimerDelay;
 	private Timer myTimer;
@@ -31,6 +34,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 	private JButton randomButton;
 	private JSlider speedSlider;
 	private SimulationLogic simLogic;
+	private ImageIcon speedMeter;
 
 	public SimulationPanel(SimulationLogic simLogic) {
 		super();
@@ -40,6 +44,8 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		this.setLayout(null);
 		this.setVisible(true);
 
+		speedMeter = new ImageIcon("src\\speed.png");
+		JLabel label = new JLabel(speedMeter);
 		buttons = new JPanel(new FlowLayout());
 		startButton = new JButton("Start");
 		clearButton = new JButton("Clear");
@@ -50,6 +56,7 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		buttons.add(startButton);
 		buttons.add(clearButton);
 		buttons.add(randomButton);
+		buttons.add(label);
 		buttons.add(speedSlider);
 		buttons.setBackground(Color.GRAY);
 		buttons.setBounds(0, PANEL_HEIGHT - 70, PANEL_WIDTH, PANEL_HEIGHT);
