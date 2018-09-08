@@ -8,11 +8,9 @@ public class Cell {
 	private boolean isAliveNextGen;
 	private int neighbours;
 
-	public Cell(boolean isAlive, int xCoordinate, int yCoordinate) {
-		this.xCoordinate = xCoordinate;
-		this.yCoordinate = yCoordinate;
+	public Cell(boolean isAlive) {
 		this.isAlive = isAlive;
-		isAliveNextGen = false;
+		this.isAliveNextGen = false;
 		this.neighbours = 0;
 	}
 

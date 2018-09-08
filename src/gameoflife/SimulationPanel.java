@@ -88,13 +88,13 @@ public class SimulationPanel extends JPanel implements ActionListener {
 		int rectHeight = (DRAW_HEIGHT/rows);
 
 		for(int x = 0; x < columns; x++) {
-			for(int yPos = 0; yPos < rows; yPos++) {
-				if(simLogic.getCellMatrix()[x][yPos].isAlive()) {
+			for(int y = 0; y < rows; y++) {
+				if(simLogic.getCellMatrix()[x][y].isAlive()) {
 					g.setColor(Color.YELLOW);
-					g.fillRect(x * rectWidth, yPos * rectHeight, rectWidth, rectHeight);
-				} else if(!simLogic.getCellMatrix()[x][yPos].isAlive()) {
+					g.fillRect(x * rectWidth, y * rectHeight, rectWidth, rectHeight);
+				} else if(!simLogic.getCellMatrix()[x][y].isAlive()) {
 					g.setColor(Color.DARK_GRAY);
-					g.fillRect(x * rectWidth , yPos * rectHeight, rectWidth, rectHeight);
+					g.fillRect(x * rectWidth , y * rectHeight, rectWidth, rectHeight);
 				}
 			}
 		}

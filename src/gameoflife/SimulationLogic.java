@@ -16,7 +16,7 @@ public class SimulationLogic {
 	private void initCells() {
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {
-				cellMatrix[x][y] = new Cell(false, x, y);
+				cellMatrix[x][y] = new Cell(false);
 			}
 		}
 	}
